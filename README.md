@@ -34,38 +34,31 @@ Patrick Alt: Patrick_Alt@ultimatesoftware.com
 Justin Phillips: Justin_Phillips@ultimatesoftware.com 
 
 ## Resources
-AI Domain Expert
-Source Code
-https://github.com/orgs/AITestingOrg/teams/ai-domain-expert
-Trello Board
-https://trello.com/b/A7kqvFAg/ai-domain-expert 
-Project Overview
-N/A
-Slack Channel
-### domain-expert
-Meeting
-Thursdays Bi-Weekly, 3pm in breakout rooms and Skype upon request
-Perception
-Source Code
-https://github.com/orgs/AITestingOrg/teams/perception
-Trello Board
-https://trello.com/b/RNoqAcFZ/ai-perception 
-Project Overview
-N/A
-Slack Channel
-### perception
-Meeting
-Thursdays Bi-Weekly, 2pm.  Skype upon request
-Microservices
-Source Code
-https://github.com/orgs/AITestingOrg/teams/microservices/members
-Trello Board
-https://trello.com/b/t7vmF2ZM/microservices 
-Project Overview
-N/A
-Slack Channel
-### microservices
-Meeting
-Fridays Bi-Weekly, 2pm in breakout rooms and Skype upon request
+### CI
+https://travis-ci.org/AITestingOrg/
+
+### Deployments
+Coming soon...
+
+### AI Domain Expert
+* Source Code https://github.com/orgs/AITestingOrg/teams/ai-domain-expert
+* Board https://github.com/orgs/AITestingOrg/projects/2
+* Project Overview N/A
+* Slack Channel #domain-expert
+* Meeting: Thursdays Bi-Weekly, 3pm in breakout rooms and Skype upon request
+
+### Perception
+* Source Code https://github.com/orgs/AITestingOrg/teams/perception
+* Board https://github.com/orgs/AITestingOrg/projects/3
+* Project Overview N/A
+* Slack Channel #perception
+* Meeting: Thursdays Bi-Weekly, 2pm.  Skype upon request
+
+### Microservices
+* Source Code https://github.com/orgs/AITestingOrg/teams/microservices/members
+* Board https://github.com/orgs/AITestingOrg/projects/1
+* Project Overview N/A
+* Slack Channel #microservices
+* Meeting: Fridays Bi-Weekly, 2pm in breakout rooms and Skype upon request
 
 
