@@ -21,7 +21,7 @@ If you are starting a new project please follow our naming and tech stack guidel
 
 ### Gettings Started
 * Creating a new repository [New Repository Guidelines](creating-repositories.md)
-* Your first contribution / pull request (PR) 
+* Your first contribution / pull request (PR) [Contribution Guidelines](contribution-process.md)
 * Style Guides
     * [Google’s Java Style Guide](https://google.github.io/styleguide/javaguide.html)
     * [Angular’s Style Guide](https://angular.io/guide/styleguide)
