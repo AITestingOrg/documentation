@@ -5,8 +5,8 @@ GitHub: https://github.com/AITestingOrg
 Slack: http://aitestingorg.slack.com 
 Trello: https://trello.com/aist6 
 
-
-## Welcome--we’re glad you’re here!
+## Welcome
+we’re glad you’re here!
 
 If this is your first time contributing to the project you’ll need to get a few things out of the way:
 * Become a contributor on our GitHub Org https://github.com/AITestingOrg 
