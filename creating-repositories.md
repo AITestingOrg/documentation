@@ -41,3 +41,6 @@ https://github.com/wsargent/docker-cheat-sheet
 * Go to Branches  
 * Choose the Master Branch under Protected Branches 
 * Add the following settings and Save 
+  * Require pull request reviews before merging 
+  * Require status checks to pass before merging 
+
