@@ -17,7 +17,7 @@ In general a cmd project will have the following package structure.
   * configuration
   * controllers
   * repositories
-
+  
 Using the aist eventsourcing configuration library.
 
 ## Domain
