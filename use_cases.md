@@ -1,19 +1,8 @@
 | Name                                    |  Steps |
 |----------------------------------------|---------------------------------------------------------------------------------|
-                                        |
-|Get Trip Estimate                       |  Given I am logged in as a user
-                                        |  When I choose a destination
-                                        |  Then I should be presented with a trip cost estimate|
-                                        |
-|End Trip for User                       |  Given I am logged in as a user
-                                        |  When the driver drops me off
-                                        |  I should be presented with an invoice for payment|
-                                        |
-|Rate for User                           |  Given I am logged in as a user
-                                        |  and I am on an invoice page
-                                        |  When I enter text in the review box and press the rate button
-                                        |  Then I am presented a thank you screen.|
-                                        |
+|Get Trip Estimate                       |  Given I am logged in as a user\s\sWhen I choose a destination\s\sThen I should be presented with a trip cost estimate|
+|End Trip for User                       |  Given I am logged in as a user\s\sWhen the driver drops me off\s\sI should be presented with an invoice for payment|
+|Rate for User                           |  Given I am logged in as a user\s\sand I am on an invoice page\s\sWhen I enter text in the review box and press the rate button\s\sThen I am presented a thank you screen.|
 |Enable Driver                           |  Given I am logged in as a Driver
                                         |  When I click I'm available
                                         |  Then users should be able to click me from available Driver list|
