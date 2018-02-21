@@ -20,8 +20,8 @@ Once you have done that you will be free to start helping out. We highly encoura
 If you are starting a new project please follow our naming and tech stack guidelines <link to guidelines>. To work on existing projects all you need to do is know how to use GIT and create GitHub Pull Requests ( https://help.github.com/articles/about-pull-requests/ ).
 
 ### Gettings Started
-* Creating a new repository [New Repository Guidelines](creating-repositories.md)
-* Your first contribution / pull request (PR) [Contribution Guidelines](contribution-process.md)
+* Creating a new repository [New Repository Guidelines](standards/creating-repositories.md)
+* Your first contribution / pull request (PR) [Contribution Guidelines](standards/contribution-process.md)
 * Style Guides
     * [Google’s Java Style Guide](https://google.github.io/styleguide/javaguide.html)
     * [Angular’s Style Guide](https://angular.io/guide/styleguide)
