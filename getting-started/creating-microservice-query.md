@@ -24,6 +24,7 @@ Using the aist eventsourcing configuration library.
 ### eventhandlers
 * Add required event handlers.
 ```java
+@Component
 public class TripEventHandler {
     protected static final Logger LOG = LoggerFactory.getLogger(TripEventHandler.class);
 
