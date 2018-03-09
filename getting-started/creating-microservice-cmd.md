@@ -146,12 +146,6 @@ public class CancelTripCommand {
 * This package is optional if nothing else is needed.
 ## Service
 ### Configuration.
-* Ampq Event configuration.
-```java
-@Configuration
-public class TripAmqpEventConfiguration extends AmqpEventSubscriptionConfiguration{
-}
-```
 * Event store configuration.
 ```java
 @Configuration
