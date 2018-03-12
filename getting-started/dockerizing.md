@@ -24,7 +24,7 @@ Then run:
 
 ```travis encrypt VAR_NAME="value to encrypt"```
 
-These values can then be used throught the script.
+For the variables DOCKER_USERNAME and DOCKER_PASSWORD as seen in the script below. These values can then be used throught the script.
 
 Add the following script to the .travis.yml file in for the project and add the corresponding docker hub repo for the project. By default only master will be pushed but this can be configured to push depending on other conditions like git tags.
 
