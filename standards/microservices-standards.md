@@ -1,12 +1,13 @@
-# INDEX
+# List of contents
 
 * [Spring boot minimun requirements.](#minimum-requirements-for-spring-boot-services)
 * [Code Style](#code-style)
 * [Coverage](#coverage)
 * [Docker](#docker)
 * [Travis CI](#travis)
+* [Logging](#logging)
 
-[Back](../README.md)
+[Back to README](../README.md)
 
 ---
 # Minimum Requirements for Spring Boot Services
@@ -17,12 +18,12 @@
 * 100% test coverage on logic
 * Authentication profile
 * Two docker compose scripts
-* Docker Image
+* Docker Image(See [Docker](#docker))
 * Travis (uploads Docker, Runs tests, test coverage, lint)
 * Configured to use configuration server
 * All communication via RestTemplate or Events
 
-[Back](#index)
+[Back to top](#list-of-contents)
 
 ---
 
@@ -36,12 +37,12 @@ Java projects should use checkstyle plugin for code style reports and checks. Th
 
 Add the plugin to build graddle:
 
-```groovy
+```java
 apply plugin: 'checkstyle'
 ```
 
 The plugin can be configured in a few ways:
-```groovy
+```java
 checkstyle {
 	toolVersion = "8.7"
 	configFile = new File(rootDir, "checkstyle.xml")
@@ -65,7 +66,7 @@ checkstyleTest {
 * the checkstyleMain and checkstyleTest can be used to customize these two tasks. Files to be excluded can be added.
 * A modified version of google's javaguide can be found in [here](checkstyle.xml).
 
-[Back](#index)
+[Back to top](#list-of-contents)
 
 ---
 
@@ -106,7 +107,7 @@ This accomplishes:
 * Define a rule that enforces 85% coverage.
 * Tell the test task to run jacocoTestCoverageVerification after it finishes.
 
-[Back](#index)
+[Back to top](#list-of-contents)
 
 ---
 
@@ -143,7 +144,7 @@ The following example spins up mongodb, rabbitmq and the current application as 
 
 By not specifying the host ports for the project services it is left to docker compose to figure out what available ports are left. The port assigned to it can be check running ```docker ps``` and checking the PORTS entry for the docker image.  
 
-For example: ```0.0.0.0:32777->8080/tcp``` means that host port 32777 is the port used by the container.
+For example: ```0.0.0.0:32777->8080/tcp``` means that host port 32777 is the port used by the container and comunicates with the port 8080 inside the container.
 
 ```yml
 version: '3'
@@ -212,7 +213,7 @@ after_success:
   - docker push $REPO
 ```
 
-[Back](#index)
+[Back to top](#list-of-contents)
 
 ---
 
@@ -229,4 +230,58 @@ encoding: utf8
 
 This file can be configured to start services, define environment variables, run scripts, build docker, and other tasks. Other customizations and options can be found [here](https://docs.travis-ci.com/user/customizing-the-build/).
 
-[Back](#index)
+[Back to top](#list-of-contents)
+
+---
+
+# Logging
+
+Logging should be provided for relevant endopoints, event handlers, and other interactions that are not automatically logged. 
+
+Spring has some built in classes that automatically log requests arriving.
+
+```java
+@Configuration
+public class RequestLoggingFilterConfiguration {
+
+    @Bean
+    public CommonsRequestLoggingFilter logFilter() {
+        CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+        filter.setIncludeQueryString(true);
+        filter.setIncludePayload(true);
+        filter.setMaxPayloadLength(10000);
+        filter.setIncludeHeaders(true);
+        filter.setAfterMessagePrefix("REQUEST DATA : ");
+        return filter;
+    }
+}
+```
+
+And enable DEBUG loging for it on the application.yml file
+
+```yaml
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+```
+
+For more customized loggings on other classes the slf4j logger can be used. Add it to the desired class:
+
+```java
+private static final Logger LOG = LoggerFactory.getLogger(CurrentClass.class);
+```
+
+Replacing CurrentClass with the name of the class it is located on. It can then be used like:
+
+```java
+LOG.info("some relevant call or logic.")	
+LOG.debug("something helpful for debugging.")	
+LOG.error("some critical error that happened.")	
+```
+
+[Back to top](#list-of-contents)
+
