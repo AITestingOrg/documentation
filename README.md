@@ -60,5 +60,6 @@ Coming soon...
 * Project Overview N/A
 * Slack Channel #microservices
 * Meeting: Fridays Bi-Weekly, 2pm in breakout rooms and Skype upon request
+* Spring boot microservices [standards](standards/microservices-standards.md)
 
 
