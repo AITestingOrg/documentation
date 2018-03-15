@@ -196,9 +196,7 @@ encoding: utf8
 
 This file can be configured to start services, define environment variables, run scripts, build docker, and other tasks. Other customizations and options can be found [here](https://docs.travis-ci.com/user/customizing-the-build/).
 
-[Back to top](#list-of-contents)
-
-## .travis.yml file
+## Uploading to Docker Hub
 
 If travis is not installed, first install it with gem:
 
