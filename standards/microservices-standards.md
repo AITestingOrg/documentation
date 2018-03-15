@@ -236,7 +236,7 @@ after_success:
 
 # Backing Service
 
-We are currently using one Backing service (the Edge service) which utilizes Zuul.
+We are currently using a Backing service known as the Edge service which utilizes Zuul.
 
 More documentation and standards on Zuul itself is found [here](https://github.com/Netflix/zuul).
 
