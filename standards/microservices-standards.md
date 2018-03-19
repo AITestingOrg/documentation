@@ -1,10 +1,11 @@
-# List of contents
+# Contents
 
-* [Spring boot minimun requirements.](#minimum-requirements-for-spring-boot-services)
+* [Spring Boot Minimum Requirements](#minimum-requirements-for-spring-boot-services)
 * [Code Style](#code-style)
 * [Coverage](#coverage)
 * [Docker](#docker)
 * [Travis CI](#travis)
+* [Backing Service](#backing-service)
 * [Logging](#logging)
 
 [Back to README](../README.md)
@@ -12,14 +13,14 @@
 ---
 # Minimum Requirements for Spring Boot Services
 
-* If accessible via front-end must have routes in Edge service
+* If accessible via front-end there must be routes in the [Edge service](#backing-service)
 * Must use Eureka for all communication
 * Must have 85% test coverage(See [Coverage](#coverage))
 * 100% test coverage on logic
 * Authentication profile
 * Two docker compose scripts
 * Docker Image(See [Docker](#docker))
-* Travis (uploads Docker, Runs tests, test coverage, lint)
+* Travis (uploads Docker, runs tests, test coverage, lint)
 * Configured to use configuration server
 * All communication via RestTemplate or Events
 
@@ -29,13 +30,13 @@
 
 # Code Style
 
-Projects should follow well known and stablished code-style guides. 
+Projects should follow well known and established code-style guides. 
 
-In the case of Java code the [google style guide](https://google.github.io/styleguide/javaguide.html) is followed except that 4 spaces are used for indentation. 
+In the case of Java code, follow the [Google style guide](https://google.github.io/styleguide/javaguide.html) with the exception of indentation (use 4 spaces).
 
-Java projects should use checkstyle plugin for code style reports and checks. This plugin will by default run on build.
+Java projects should use the checkstyle plugin for code style reports and checks. The plugin will run on build by default.
 
-Add the plugin to build graddle:
+Add the plugin to build Gradle:
 
 ```java
 apply plugin: 'checkstyle'
@@ -61,10 +62,10 @@ checkstyleTest {
 }
 ```
 
-* toolVersion is used to specifie the version to use, by default it is an older version.
-* configFile is used to specify the xml file with the rules to follow.
-* the checkstyleMain and checkstyleTest can be used to customize these two tasks. Files to be excluded can be added.
-* A modified version of google's javaguide can be found in [here](checkstyle.xml).
+* `toolVersion` is used to specify the version to use, by default it is an older version.
+* `configFile` is used to specify the XML file with the rules to follow.
+* The `checkstyleMain` and `checkstyleTest` can be used to customize these two tasks. Add in excluded files here.
+* A modified version of Google's Java guide can be found [here](checkstyle.xml).
 
 [Back to top](#list-of-contents)
 
@@ -72,15 +73,15 @@ checkstyleTest {
 
 # Coverage
 
-There should be a code coverage of at least 85% for the code, and 100% for logic in general. 
+There should be code coverage of at least 85%, and 100% for logic in general. 
 
-In java the jacoco pluging can be used to provide checks and integration with builds. This can be configured in gradle like this.
+In Java the Jacoco plugin can be used to provide checks and integration with builds. This can be configured in Gradle like so:
 
 ```java
 apply plugin: "jacoco"
 ```
 
-This can be futher configured:
+This can be further configured:
 
 ```java
 jacocoTestReport {
@@ -103,9 +104,9 @@ test.finalizedBy(jacocoTestCoverageVerification)
 
 This accomplishes:
 
-* Specifying the output for the html report location.
-* Define a rule that enforces 85% coverage.
-* Tell the test task to run jacocoTestCoverageVerification after it finishes.
+* Specifying the output for the HTML report location.
+* Defining a rule that enforces 85% coverage.
+* Telling the test task to run jacocoTestCoverageVerification after it finishes.
 
 [Back to top](#list-of-contents)
 
@@ -115,7 +116,7 @@ This accomplishes:
 
 ## Dockerfile
 
-A Dockerfile file should be added at the root level of the project. This is a sample springboot default Dockerfile:
+A Dockerfile file should be added at the root level of the project. This is a sample default Dockerfile from Spring Boot:
 
 ```
 FROM frolvlad/alpine-oraclejdk8:slim
@@ -129,22 +130,23 @@ The path to the output folder jar file should be properly added, for example:
 
 build/libs/new-project-0.0.1-SNAPSHOT.jar
 
-The exposed port should match the port the applications is cofigured to listen too.
+The exposed port should match the port the applications is configured to listen to.
 
 ## docker-compose.yml
 
-A docker-compose.yml file should be added to the applications root:
+A docker-compose.yml file should be added to the applications root folder.
+
 This is an example docker compose file which follow the structure:
-* version:
+* `version`:
     This field is always required.
-* services:
+* `services`:
     A list of the services needed for the application to run correctly.
 
-The following example spins up mongodb, rabbitmq and the current application as docker containers. 
+The following example spins up `mongodb`, `rabbitmq` and the current application as Docker containers. 
 
-By not specifying the host ports for the project services it is left to docker compose to figure out what available ports are left. The port assigned to it can be check running ```docker ps``` and checking the PORTS entry for the docker image.  
+By not specifying the host ports for the project services, it is left to docker compose to figure out what available ports to configure. You can find the port that docker compose assigned using the command `docker ps` and checking the PORTS entry for the Docker image.  
 
-For example: ```0.0.0.0:32777->8080/tcp``` means that host port 32777 is the port used by the container and comunicates with the port 8080 inside the container.
+For example: `0.0.0.0:32777->8080/tcp` means that host port 32777 is the port used by the container, and it communicates with the port 8080 inside the container.
 
 ```yml
 version: '3'
@@ -177,23 +179,38 @@ volumes:
   mongo:
 ```
 
-Official documentation and more info can be found [here](https://docs.docker.com/compose/)
+Official documentation and more info can be found [here](https://docs.docker.com/compose/).
 
+---
 
-## .travis.yml file
+# Travis
 
-Add the needed credentials for docker using travis from the command line:
+A .travis.yml file needs to be added to the project. A minimum example for a java project is:
+
+```yml
+language: java
+jdk:
+  - oraclejdk8
+encoding: utf8
+```
+
+This file can be configured to start services, define environment variables, run scripts, build docker, and other tasks. Other customizations and options can be found [here](https://docs.travis-ci.com/user/customizing-the-build/).
+
+## Uploading to Docker Hub
+
 If travis is not installed, first install it with gem:
 
 ```gem install travis```
 
-Then run from the project root folder, reply *yes* when prompted:
+Add the needed credentials for Docker using travis from the command line from now on.
+
+Run this command from the project root folder for the variables `DOCKER_USERNAME` and `DOCKER_PASSWORD`. Reply *yes* when prompted:
 
 ```travis encrypt VAR_NAME="value to encrypt" --add```
 
-For the variables DOCKER_USERNAME and DOCKER_PASSWORD as seen in the script below. These values can then be used throught the script.
+These values can then be used throughout the script.
 
-Add the following script to the .travis.yml file in for the project and add the corresponding docker hub repo for the project in place of \_DOCKERHUB_REPO_. By default only master will be pushed but this can be configured to push depending on other conditions like git tags.
+Add the following script to the `.travis.yml` file in for the project and add the corresponding Docker hub repo for the project in place of `\_DOCKERHUB_REPO_`. By default only master will be pushed, but this can be configured to push depending on other conditions like git tags.
 
 ```yml
 before_install:
@@ -217,28 +234,76 @@ after_success:
 
 ---
 
-# Travis
+# Backing Service
 
-A .travis.yml file needs to be added to the project. A minimun example for a java project is:
+We are currently using a Backing service known as the Edge service which utilizes Zuul.
+
+More documentation and standards on Zuul itself is found [here](https://github.com/Netflix/zuul).
+
+## Connecting services to Edge
+
+Before configuring the service to route through Edge, make sure that you have [Docker](#docker) and [travis](#travis) set up.
+
+Configure the `docker-compose.yml` in the Edge service root folder with the service you're connecting like so:
 
 ```yml
-language: java
-jdk:
-  - oraclejdk8
-encoding: utf8
+  name-of-service:
+    image: organization/name-of-service #Image being pulled from Docker Hub
+    container_name: name-of-service
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - MONGO_HOST=mongo
+    ports:
+      - '####'
+    depends_on:
+      - discovery-service #We want the service to depend on Eureka
+      - rabbitmq #If the project uses RabbitMQ to communicate, be sure to make it depend on the service beforehand
+      - mongo
 ```
 
-This file can be configured to start services, define environment variables, run scripts, build docker, and other tasks. Other customizations and options can be found [here](https://docs.travis-ci.com/user/customizing-the-build/).
+Configure the second docker compose file (which should be found within `src/test/resources`) so that the Edge can also run integration tests on the services you just added.
 
-[Back to top](#list-of-contents)
+```yml
+  name-of-service:
+    image: organization/name-of-service #Image being pulled from Docker Hub
+    container_name: name-of-service
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - MONGO_HOST=mongo
+    ports:
+      - '####:####' #Specifying port that service will run on is imperative for the test (look in the config service for this)
+    depends_on:
+      - discovery-service
+      - rabbitmq
+      - mongo
+      #ANY OTHER SERVICES
+```
+
+## Testing the services with Edge
+
+The Edge service uses [Palantir's DockerComposeRule](https://github.com/palantir/docker-compose-rule) to wait for services to spin up before continuing with the actual tests.
+
+After creating a new test for your added service, be sure to add into the `@ClassRule` called `docker` the necessary code to wait for your service:
+
+```java
+waitingForService("NAME OF CONTAINER", HealthChecks.toHaveAllPortsOpen())
+            .waitingForService("NAME OF CONTAINER", HealthChecks.toRespondOverHttp(INTERNAL PORT,
+                (port) -> port.inFormat("URL")))
+```
+
+The `@ClassRule` should always end with `.build()`.
+
+This allows you to test your services locally through Gradle without having to spin up containers manually. The rule also tears down containers after all tests are executed.
+* **Note:** If your test fails during the docker compose command (or the `@ClassRule` fails in any way) the containers will not automatically be torn down. Be sure to always check for containers that are already up by using `docker ps -a`.
+* If containers are present and your test is failing, use the `docker rm -f [CONTAINERID]` command to remove the containers and run your tests again.
 
 ---
 
 # Logging
 
-Logging should be provided for relevant endopoints, event handlers, and other interactions that are not automatically logged. 
+Logging should be provided for relevant endpoints, event handlers, and other interactions that are not automatically logged. 
 
-Spring has some built in classes that automatically log requests arriving.
+Spring has some built in classes that automatically log requests arriving:
 
 ```java
 @Configuration
@@ -257,7 +322,7 @@ public class RequestLoggingFilterConfiguration {
 }
 ```
 
-And enable DEBUG loging for it on the application.yml file
+And enable DEBUG logging in the `application.yml` file
 
 ```yaml
 logging:
@@ -275,7 +340,7 @@ For more customized loggings on other classes the slf4j logger can be used. Add 
 private static final Logger LOG = LoggerFactory.getLogger(CurrentClass.class);
 ```
 
-Replacing CurrentClass with the name of the class it is located on. It can then be used like:
+After replacing `CurrentClass` with the name of the class it is located on, use it like so:
 
 ```java
 LOG.info("some relevant call or logic.")	
