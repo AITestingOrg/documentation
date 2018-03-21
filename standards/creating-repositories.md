@@ -7,11 +7,11 @@ Project names should be all lower-case with dashes instead of spaces. Project sh
 Examples:
 My New Project => my-new-project
 
-### Team Pre-fix
-Each repository needs a team prefix, they are as follows: 
-* perception--
-* microservice--
-* aide--
+### Repository Tags
+Each repository needs at least one tag to identify which project it belongs to.
+* perception -- tag: aist-perception
+* microservice-- tag: aist-sandbox
+* aide-- tag: aist-aide
 
 ## Pipeline First
 We use Travis for our pipelines, after your first commit that includes tests you will need to setup a pipeline by enabling Travis for the new repository then configure it with a Travis yaml file.
