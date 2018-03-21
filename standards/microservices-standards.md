@@ -297,6 +297,53 @@ This allows you to test your services locally through Gradle without having to s
 * **Note:** If your test fails during the docker compose command (or the `@ClassRule` fails in any way) the containers will not automatically be torn down. Be sure to always check for containers that are already up by using `docker ps -a`.
 * If containers are present and your test is failing, use the `docker rm -f [CONTAINERID]` command to remove the containers and run your tests again.
 
+## Pulling configuration definitions from Configuration Service
+
+The Configuration Service pulls the configuration files from the repo:
+https://github.com/AITestingOrg/configuration-repository
+
+The configuration files should be stored with the next structure:
+/{application}/{application}-{profile}.yml
+
+The {application} should match spring.application.name
+The {profile} should match sping.profiles.actives
+
+In the gradle.build file the next dependency should be present:
+
+```java
+compile('org.springframework.cloud:spring-cloud-starter-config')
+```
+
+It also needs to be configured in the bootstrap.yml, as instructed below:
+
+```yml
+spring:
+  application:
+    name: {application}
+  profiles:
+    active: {profile}
+  cloud:
+    config:
+      enabled: true
+      uri: {configuration-service-uri}
+```
+
+This is an example for user-service microservice bootstrap.yml:
+
+```yml
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: development
+  cloud:
+    config:
+      enabled: true
+      uri: http://configuration-service
+```
+
+The default configuration port is 8888.
+
 ---
 
 # Logging
