@@ -294,9 +294,9 @@ Before configuring the service to route through Edge, make sure that you have [D
 Configure the `docker-compose.yml` in the Edge service root folder with the service you're connecting like so:
 
 ```yml
-  name-of-service:
+  nameofservice:
     image: organization/name-of-service #Image being pulled from Docker Hub
-    container_name: name-of-service
+    container_name: nameofservice
     environment:
       - RABBIT_HOST=rabbitmq
       - MONGO_HOST=mongo
@@ -305,20 +305,20 @@ Configure the `docker-compose.yml` in the Edge service root folder with the serv
     depends_on:
       - discovery-service #We want the service to depend on Eureka
       - rabbitmq #If the project uses RabbitMQ to communicate, be sure to make it depend on the service beforehand
-      - mongo
+      - mongo #Same goes for mongo
 ```
 
 Configure the second docker compose file (which should be found within `src/test/resources`) so that the Edge can also run integration tests on the services you just added.
 
 ```yml
-  name-of-service:
+  nameofservice:
     image: organization/name-of-service #Image being pulled from Docker Hub
-    container_name: name-of-service
+    container_name: nameofservice
     environment:
       - RABBIT_HOST=rabbitmq
       - MONGO_HOST=mongo
     ports:
-      - '####:####' #Specifying port that service will run on is imperative for the test (look in the config service for this)
+      - '####' #Internal port of container
     depends_on:
       - discovery-service
       - rabbitmq
@@ -330,17 +330,32 @@ Configure the second docker compose file (which should be found within `src/test
 
 The Edge service uses [Palantir's DockerComposeRule](https://github.com/palantir/docker-compose-rule) to wait for services to spin up before continuing with the actual tests.
 
-After creating a new test for your added service, be sure to add into the `@ClassRule` called `docker` the necessary code to wait for your service:
+Palantir's DockerComposeRule also gives us DockerPort which helps us find the ports assigned by Docker to make testing easier.
+The DockerPort is necessary when making any request to a service, so be sure to add in these lines to ensure you're accessing the right URL:  
 
 ```java
-waitingForService("NAME OF CONTAINER", HealthChecks.toHaveAllPortsOpen())
-            .waitingForService("NAME OF CONTAINER", HealthChecks.toRespondOverHttp(INTERNAL PORT,
-                (port) -> port.inFormat("URL")))
+private static String nameOfServiceURL;
+```
+
+And under the `initialize()` method:  
+```java
+DockerPort serviceName = docker.containers().container("nameofcontainer")
+            .port(INTERNAL_PORT);
+        nameOfServiceURL = String.format("http://%s:%s", serviceName.getIp(),
+                serviceName.getExternalPort());
+        LOG.info("Trip Command endpoint found: " + nameOfServiceURL);
+```
+
+After creating a new test for your added service, be sure to add into the `@ClassRule` called `docker` the necessary code to wait for your service:
+**(Use the same name that you've assigned the container within the docker-compose file)**
+```java
+.waitingForService("NAME OF CONTAINER", HealthChecks.toHaveAllPortsOpen())
 ```
 
 The `@ClassRule` should always end with `.build()`.
 
 This allows you to test your services locally through Gradle without having to spin up containers manually. The rule also tears down containers after all tests are executed.
+* Use other methods already within the EdgeServiceIntegrationTest class as a template to writing your own tests for your specific service.
 * **Note:** If your test fails during the docker compose command (or the `@ClassRule` fails in any way) the containers will not automatically be torn down. Be sure to always check for containers that are already up by using `docker ps -a`.
 * If containers are present and your test is failing, use the `docker rm -f [CONTAINERID]` command to remove the containers and run your tests again.
 
