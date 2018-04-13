@@ -82,6 +82,18 @@ public class Trip {
 public class TripManagementEventSubscriptionConfiguration  extends AmqpEventSubscriptionConfiguration {
 }
 ```
+
+And on the amplication.yml file add:
+```yml
+amqp:
+  events:
+    host: ${RABBIT_HOST:localhost}
+    exchange-name: eventBus
+    queue-name: eventQueue
+    handlers: org.aitesting.microservices.tripmanagement.query.domain.eventhandlers
+```
+Where the ```handlers:``` points to the eventhandler for the model and eventBus and eventQueue are the corresponding names(if they are different).
+
 ### controllers
 ```java
 @Controller
