@@ -29,7 +29,7 @@
 
 ---
 
-# Microservice API Standars
+# Microservice API Standards
 
 Guidelines for Microservice API formatting, observing some best practices for RESTful API interfaces.
 
@@ -357,7 +357,7 @@ The `@ClassRule` should always end with `.build()`.
 This allows you to test your services locally through Gradle without having to spin up containers manually. The rule also tears down containers after all tests are executed.
 * Use other methods already within the EdgeServiceIntegrationTest class as a template to writing your own tests for your specific service.
 * **Note:** If your test fails during the docker compose command (or the `@ClassRule` fails in any way) the containers will not automatically be torn down. Be sure to always check for containers that are already up by using `docker ps -a`.
-* If containers are present and your test is failing, use the `docker rm -f [CONTAINERID]` command to remove the containers and run your tests again.
+* If containers are present and your test is failing, use the command `docker stop $(docker ps -aq)` to **stop** all containers and `docker rm $(docker ps -aq)` to **remove** all containers. Rerun your tests again after.
 
 ---
 
