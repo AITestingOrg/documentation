@@ -43,4 +43,5 @@ https://github.com/wsargent/docker-cheat-sheet
 * Add the following settings and Save 
   * Require pull request reviews before merging 
   * Require status checks to pass before merging 
-
+* In the end the protection settings should look like the following image
+![Master Branch Protection Config](images/GitHubRepoConfig.png?raw=true "Master Branch Protection Config")
