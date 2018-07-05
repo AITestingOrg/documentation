@@ -40,8 +40,5 @@ https://github.com/wsargent/docker-cheat-sheet
 * Give the team write access 
 * Go to Branches  
 * Choose the Master Branch under Protected Branches 
-* Add the following settings and Save 
-  * Require pull request reviews before merging 
-  * Require status checks to pass before merging 
-* In the end the protection settings should look like the following image
+* Adjust the settings to look like the picture below and  then save 
 ![Master Branch Protection Config](images/GitHubRepoConfig.png?raw=true "Master Branch Protection Config")
