@@ -1,6 +1,6 @@
 | Name                                    |  Steps |
 |----------------------------------------|---------------------------------------------------------------------------------|
-|Get Trip Estimate                       |  Given I am logged in as a user<br>When I choose a destination<br>Then I should be presented with a trip cost estimate|
+|Get Trip Estimate                       |  Given I am logged in as a user<br>When I choose an origin and a destination<br>Then I should be presented with a trip cost estimate|
 |End Trip for User                       |  Given I am logged in as a user<br>When the driver drops me off<br>I should be presented with an invoice for payment|
 |Rate for User                           |  Given I am logged in as a user<br>and I am on an invoice page<br>When I enter text in the review box and press the rate button<br>Then I am presented a thank you screen.|
 |Enable Driver                           |  Given I am logged in as a Driver<br>When I click I'm available<br>Then users should be able to click me from available Driver list|
