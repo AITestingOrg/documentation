@@ -226,6 +226,17 @@ volumes:
   mongo:
 ```
 
+Every project should have a docker-compose.yml file and a docker-compose-local.yml.
+The docker-compose.yml file should spin up all related services, including the service it is inside of,
+using only images from docker-hub. This is meant to be the base that always works because it uses images 
+that are hosted from the master branch. The docker-compose-local.yml file should spin up all related services 
+using hosted images, but spin up the service it is inside of by building it locally. This is to allow us to test 
+local changes alongside of working services hosted in docker-hub. Developers are encouraged to modify the 
+docker-compose-local.yml to fit their development and testing needs; but only make these changes locally, 
+do not commit any changes to the branches. For example, if they need to test changes they made in two different 
+repos they have locally, then they can have both of those projects be built locally and use the hosted images 
+for the rest of the related services. 
+
 Official documentation and more info can be found [here](https://docs.docker.com/compose/).
 
 ---
