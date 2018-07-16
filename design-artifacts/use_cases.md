@@ -13,3 +13,4 @@
 |Confirmation of Payment to Driver       |  Given I am logged in as a Driver<br> and the user submitted the payment of a finished trip<br>When the application is running<br>Then I am presented with a payment confirmation message|
 |Register User                           | |
 |Accept Trip                             |  Given I am logged in as a user and am on a trip estimate screen<br>When I accept <br>Then the closest driver is selected and notified for pickup. My screen changes to a waiting for pickup screen|
+|Log In User                             |  Given I am a registered user<br>And I am on the log in screen<br>When I click the log in button<br>Then my screen changes to the home screen|
